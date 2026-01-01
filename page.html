@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Reader</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{margin:0;background:#0b0f14;color:#fff;font-family:Arial}
+.wrap{max-width:1100px;margin:auto;padding:10px}
+img{width:100%;border-radius:12px}
+.nav{display:flex;justify-content:space-between;margin:10px 0;gap:10px}
+a{padding:10px 14px;border:1px solid #3a4a63;border-radius:10px;color:#fff;text-decoration:none}
+.small{opacity:.75;font-size:13px}
+@media (max-width:600px){ .nav{flex-direction:column} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="nav">
+    <a id="prev">← Prev</a>
+    <a href="index.html">Home</a>
+    <a id="next">Next →</a>
+  </div>
+
+  <div class="small" id="label"></div>
+  <img id="img" alt="page">
+</div>
+
+<script>
+const total=12;
+const q=new URLSearchParams(location.search);
+let p=parseInt(q.get("p")||1);
+if(p<1)p=1;if(p>total)p=total;
+
+document.getElementById("img").src=`images/p${String(p).padStart(2,"0")}.jpg`;
+document.getElementById("label").textContent=`Page ${p} / ${total} • Tip: rotate phone to landscape`;
+
+document.getElementById("prev").href = (p>1) ? `page.html?p=${p-1}` : `index.html`;
+document.getElementById("next").href = (p<total) ? `page.html?p=${p+1}` : `index.html`;
+</script>
+</body>
+</html>
