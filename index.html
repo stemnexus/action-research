@@ -1,25 +1,201 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>Action Research Digital Book</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+
   <style>
-    body{margin:0;background:#0b0f14;color:#fff;font-family:Arial}
-    .wrap{max-width:1100px;margin:auto;padding:20px}
-    img{width:100%;border-radius:12px}
-    a{display:inline-block;margin-top:16px;
-      padding:12px 18px;border:1px solid #3a4a63;
-      border-radius:10px;color:#fff;text-decoration:none}
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <h2>Action Research Digital Book</h2>
-    <p>Online reading</p>
-    <img src="images/p01.jpg">
-    <br>
-    <a href="page.html?p=1">Start Reading →</a>
-  </div>
-</body>
-</html>
+    :root{
+      /* Soft Peach Pastel Theme */
+      --bg1:#fff7f2;         /* peach milk */
+      --bg2:#ffe7dc;         /* peach pastel */
+      --card:#ffffffcc;      /* glass white */
+      --ink:#2a1f1b;         /* deep cocoa */
+      --muted:#6b5b55;
+
+      --accent:#ff9f8f;      /* peach coral */
+      --accent2:#ffb8a8;     /* lighter peach */
+      --border:#f2c7bb;
+
+      --shadow: 0 18px 45px rgba(60, 25, 15, .12);
+      --shadow2: 0 10px 25px rgba(60, 25, 15, .10);
+
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1100px 650px at 20% 10%, #ffffff 0%, transparent 55%),
+        radial-gradient(900px 600px at 90% 20%, #fff 0%, transparent 50%),
+        linear-gradient(140deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* cute floating blobs */
+    .blob{
+      position:fixed;
+      inset:auto;
+      width:380px;height:380px;
+      filter: blur(35px);
+      opacity:.55;
+      z-index:-1;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #ffd3c8, #ffb9aa, transparent 70%);
+      animation: floaty 10s ease-in-out infinite;
+    }
+    .blob.b2{
+      width:460px;height:460px;
+      right:-120px; top:110px;
+      background: radial-gradient(circle at 30% 30%, #ffe1d7, #ffc7b8, transparent 72%);
+      animation-duration: 12s;
+    }
+    .blob.b1{
+      left:-140px; top:-120px;
+    }
+    @keyframes floaty{
+      0%,100%{transform: translate(0,0) scale(1)}
+      50%{transform: translate(18px, 22px) scale(1.05)}
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 18px 90px; /* extra bottom for buttons */
+    }
+
+    header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:16px;
+    }
+
+    .title{
+      line-height:1.1;
+    }
+    .title h1{
+      margin:0;
+      font-size:clamp(26px, 3.2vw, 40px);
+      letter-spacing:.2px;
+    }
+    .title p{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-size:clamp(14px, 1.4vw, 16px);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      box-shadow: var(--shadow2);
+      color:var(--muted);
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(255,159,143,.18);
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(900px 220px at 35% 0%, rgba(255,159,143,.22), transparent 55%);
+      pointer-events:none;
+    }
+
+    figure{
+      margin:0;
+      position:relative;
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(242,199,187,.9);
+      background:#fff;
+    }
+    figure img{
+      width:100%;
+      display:block;
+      transform: scale(1.005);
+    }
+    .imgHint{
+      position:absolute;
+      left:14px; bottom:14px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.85);
+      border:1px solid rgba(242,199,187,.9);
+      color:var(--muted);
+      font-size:12px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 18px rgba(60, 25, 15, .10);
+    }
+
+    /* bottom pill buttons */
+    .actions{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      padding:14px 14px 18px;
+      background: linear-gradient(180deg, rgba(255,247,242,0), rgba(255,247,242,.88) 30%, rgba(255,231,220,.95));
+      backdrop-filter: blur(8px);
+      border-top:1px solid rgba(242,199,187,.8);
+    }
+
+    .actionsInner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .pill{
+      appearance:none;
+      border:1px solid rgba(242,199,187,.95);
+      background: rgba(255,255,255,.78);
+      color: var(--ink);
+      text-decoration:none;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      letter-spacing:.2px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      box-shadow: 0 12px 22px rgba(60, 25, 15, .10);
+      transform: translateY(0);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+
+    .pill .icon{
+      width:22px;height:22px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(180deg, rgba(255,159,143,.25), rgba(255,184,168,
