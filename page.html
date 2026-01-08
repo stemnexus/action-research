@@ -8,205 +8,75 @@
 
 <style>
   :root{
-    --bg1:#fff7f2;
-    --bg2:#ffe7dc;
-    --card:#ffffffcc;
-
-    --ink:#2a1f1b;
-    --muted:#6b5b55;
-
-    --accent:#ff9f8f;
-    --accent2:#ffb8a8;
+    --bg1:#fff7f2; --bg2:#ffe7dc;
+    --ink:#2a1f1b; --muted:#6b5b55;
+    --accent:#ff9f8f; --accent2:#ffb8a8;
     --border:#f2c7bb;
-
-    --shadow: 0 18px 45px rgba(60, 25, 15, .12);
-    --shadow2: 0 10px 25px rgba(60, 25, 15, .10);
-
+    --shadow:0 18px 45px rgba(60,25,15,.12);
     --radius:22px;
   }
-
   *{box-sizing:border-box}
-  html,body{height:100%}
-
   body{
     margin:0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+    font-family: Arial, sans-serif;
     color:var(--ink);
-    background:
-      radial-gradient(1100px 650px at 20% 10%, #ffffff 0%, transparent 55%),
-      radial-gradient(900px 600px at 90% 20%, #fff 0%, transparent 50%),
-      linear-gradient(140deg, var(--bg1), var(--bg2));
-    overflow-x:hidden;
+    background: linear-gradient(135deg,var(--bg1),var(--bg2));
+    min-height:100vh;
   }
 
-  /* soft blobs */
-  .blob{
-    position:fixed;
-    width:420px;height:420px;
-    filter: blur(35px);
-    opacity:.55;
-    z-index:-1;
-    border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, #ffd3c8, #ffb9aa, transparent 70%);
-    animation: floaty 10s ease-in-out infinite;
+  .wrap{max-width:1200px;margin:0 auto;padding:18px 16px 110px}
+  .top{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:12px;margin-bottom:12px;flex-wrap:wrap;
   }
-  .blob.b1{left:-160px; top:-140px}
-  .blob.b2{
-    right:-150px; top:120px;
-    width:520px;height:520px;
-    background: radial-gradient(circle at 30% 30%, #ffe1d7, #ffc7b8, transparent 72%);
-    animation-duration: 12s;
-  }
-  @keyframes floaty{
-    0%,100%{transform: translate(0,0) scale(1)}
-    50%{transform: translate(18px, 22px) scale(1.05)}
-  }
-
-  .wrap{
-    max-width:1200px;
-    margin:0 auto;
-    padding:18px 16px 118px; /* ruang untuk nav bawah */
-  }
-
-  header{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:12px;
-    margin-bottom:14px;
-  }
-
-  .title{
-    min-width:0;
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-  }
-  .title h1{
-    margin:0;
-    font-size:clamp(18px, 2.1vw, 26px);
-    line-height:1.15;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-
-  .sub{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    align-items:center;
+  .title{font-weight:800;font-size:18px}
+  .chip{
+    display:inline-block;
+    padding:8px 12px;border-radius:999px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.75);
     color:var(--muted);
     font-size:13px;
-  }
-
-  .chip{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 12px;
-    border-radius:999px;
-    border:1px solid var(--border);
-    background: rgba(255,255,255,.72);
-    box-shadow: var(--shadow2);
-  }
-  .dot{
-    width:10px;height:10px;border-radius:50%;
-    background: linear-gradient(180deg, var(--accent), var(--accent2));
-    box-shadow: 0 0 0 4px rgba(255,159,143,.18);
-  }
-
-  .progressWrap{
-    width:260px;
-    max-width:40vw;
-    height:10px;
-    border-radius:999px;
-    background: rgba(255,255,255,.65);
-    border:1px solid rgba(242,199,187,.9);
-    overflow:hidden;
-    box-shadow: var(--shadow2);
-    align-self:center;
-  }
-  .progressBar{
-    height:100%;
-    width:0%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius:999px;
-    transition: width .25s ease;
+    box-shadow: var(--shadow);
   }
 
   .card{
     border:1px solid var(--border);
-    background: var(--card);
-    border-radius: var(--radius);
+    background:rgba(255,255,255,.78);
+    border-radius:var(--radius);
     box-shadow: var(--shadow);
-    padding:16px;
-    position:relative;
-    overflow:hidden;
+    padding:14px;
   }
-  .card::before{
-    content:"";
-    position:absolute;
-    inset:-2px;
-    background: radial-gradient(900px 220px at 35% 0%, rgba(255,159,143,.22), transparent 55%);
-    pointer-events:none;
-  }
-
-  .stage{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:10px;
-  }
-  .frame{
+  img{
     width:100%;
-    max-width:1100px;
     border-radius:18px;
-    overflow:hidden;
     border:1px solid rgba(242,199,187,.95);
     background:#fff;
-    box-shadow: 0 14px 30px rgba(60, 25, 15, .10);
+    display:block;
   }
-  img{width:100%;height:auto;display:block}
-
-  .hint{
-    margin-top:12px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-    color:var(--muted);
+  .err{
+    margin-top:10px;
+    padding:12px 14px;
+    border-radius:14px;
+    border:1px dashed rgba(255,159,143,.75);
+    background:rgba(255,255,255,.85);
+    color:#7a3f33;
+    display:none;
     font-size:13px;
   }
-  .hint span{
-    background: rgba(255,255,255,.72);
-    border:1px solid rgba(242,199,187,.85);
-    padding:8px 12px;
-    border-radius:999px;
-  }
 
-  /* bottom cute pill nav */
+  /* bottom pill nav */
   .actions{
-    position:fixed;
-    left:0; right:0; bottom:0;
+    position:fixed;left:0;right:0;bottom:0;
     padding:14px 14px 18px;
-    background: linear-gradient(180deg, rgba(255,247,242,0), rgba(255,247,242,.90) 30%, rgba(255,231,220,.95));
-    backdrop-filter: blur(8px);
+    background: linear-gradient(180deg, rgba(255,247,242,0), rgba(255,231,220,.95));
     border-top:1px solid rgba(242,199,187,.85);
   }
   .actionsInner{
-    max-width:1200px;
-    margin:0 auto;
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    flex-wrap:wrap;
-    align-items:center;
+    max-width:1200px;margin:0 auto;
+    display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
   }
-
-  .pill{
-    appearance:none;
+  a.pill, button.pill{
     border:1px solid rgba(242,199,187,.95);
     background: rgba(255,255,255,.78);
     color: var(--ink);
@@ -214,45 +84,99 @@
     padding:12px 18px;
     border-radius:999px;
     font-weight:800;
-    letter-spacing:.2px;
     display:inline-flex;
     align-items:center;
     gap:10px;
-    box-shadow: 0 12px 22px rgba(60, 25, 15, .10);
-    transform: translateY(0);
-    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    box-shadow: 0 12px 22px rgba(60,25,15,.10);
     cursor:pointer;
-    user-select:none;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
   }
-  .pill .icon{
-    width:24px;height:24px;
-    border-radius:999px;
-    display:grid;
-    place-items:center;
-    background: linear-gradient(180deg, rgba(255,159,143,.25), rgba(255,184,168,.18));
-    border:1px solid rgba(255,159,143,.28);
-  }
-
-  .pill.primary{
-    background: linear-gradient(180deg, rgba(255,159,143,.95), rgba(255,184,168,.95));
-    border-color: rgba(255,159,143,.7);
-    color:#2a1f1b;
-  }
-  .pill.primary .icon{
-    background: rgba(255,255,255,.35);
-    border-color: rgba(255,255,255,.45);
-  }
-
-  .pill:hover{
+  a.pill:hover, button.pill:hover{
     transform: translateY(-2px);
-    box-shadow: 0 16px 30px rgba(60, 25, 15, .14);
+    box-shadow: 0 16px 30px rgba(60,25,15,.14);
     background: rgba(255,255,255,.92);
     border-color: rgba(255,159,143,.65);
   }
-  .pill.primary:hover{
+  a.pill.primary{
+    background: linear-gradient(180deg, rgba(255,159,143,.95), rgba(255,184,168,.95));
+    border-color: rgba(255,159,143,.7);
+  }
+  a.pill.primary:hover{
     background: linear-gradient(180deg, rgba(255,159,143,1), rgba(255,184,168,1));
   }
-  .pill:active{transform: translateY(0) scale(.99)}
-  .pill:focus-visible{
-    outline:none;
-    box-shadow: 0 0 0 4px rgba(2
+
+  @media (max-width:560px){
+    .wrap{padding-bottom:140px}
+    a.pill, button.pill{width:100%; justify-content:center}
+  }
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="title">Reader • Action Research Digital Book</div>
+      <div class="chip" id="label">Loading…</div>
+    </div>
+
+    <div class="card">
+      <img id="img" alt="page" />
+      <div class="err" id="errBox"></div>
+    </div>
+  </div>
+
+  <nav class="actions">
+    <div class="actionsInner">
+      <a class="pill" id="prev" href="#">⬅️ Prev</a>
+      <a class="pill primary" href="index.html">🏠 Home</a>
+      <a class="pill" id="next" href="#">Next ➡️</a>
+      <button class="pill" type="button" onclick="scrollTo({top:0,behavior:'smooth'})">⬆️ Top</button>
+    </div>
+  </nav>
+
+<script>
+  // ===== SETTINGS =====
+  var total = 12;
+
+  // ===== Get page number =====
+  var q = new URLSearchParams(window.location.search);
+  var p = parseInt(q.get("p") || "1", 10);
+  if (isNaN(p) || p < 1) p = 1;
+  if (p > total) p = total;
+
+  // ===== Build file path =====
+  var file = "p" + String(p).padStart(2, "0") + ".jpg";
+  var path = "images/" + file;
+
+  // ===== Set labels + nav =====
+  document.getElementById("label").textContent = "Page " + p + " / " + total + " • " + file;
+
+  document.getElementById("prev").href = (p > 1) ? ("page.html?p=" + (p-1)) : "index.html";
+  document.getElementById("next").href = (p < total) ? ("page.html?p=" + (p+1)) : "index.html";
+
+  // ===== Load image with error handling =====
+  var img = document.getElementById("img");
+  var errBox = document.getElementById("errBox");
+
+  img.onload = function(){
+    errBox.style.display = "none";
+  };
+
+  img.onerror = function(){
+    errBox.style.display = "block";
+    errBox.textContent =
+      "Image tak jumpa: " + path +
+      " | Sila semak folder images dan nama fail (p01.jpg – p12.jpg).";
+  };
+
+  img.src = path;
+
+  // Keyboard nav
+  document.addEventListener("keydown", function(e){
+    if (e.key === "ArrowLeft" && p > 1) window.location.href = "page.html?p=" + (p-1);
+    if (e.key === "ArrowRight" && p < total) window.location.href = "page.html?p=" + (p+1);
+    if (e.key.toLowerCase() === "h") window.location.href = "index.html";
+  });
+</script>
+</body>
+</html>
